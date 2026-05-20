@@ -2,13 +2,29 @@ using UnityEngine;
 
 public class Axe : MonoBehaviour
 {
+    public int hit;
+    public float proficiency;
+
     public void Attack(int count)
     {
-        if (count >= 10)
+         hit += count;
+
+        if ( hit % 10 == 0)
         {
             Debug.Log("Crtical Hit");
-
-            count = 0;
         }
+    }
+
+    public void Throw(float experience)
+    {
+        if (proficiency >= 100)
+        {
+            Debug.Log("Critical hit");
+
+            return;
+        } 
+
+        proficiency += experience;
+
     }
 }
