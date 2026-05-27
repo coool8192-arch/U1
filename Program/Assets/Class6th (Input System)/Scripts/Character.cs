@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    public Vector3 direction;
+    [SerializeField] Vector3 direction;
+    [SerializeField] float speed;
     void Start()
     {
 
@@ -10,9 +11,11 @@ public class Character : MonoBehaviour
 
     void Update()
     {
-        direction.x = Input.GetAxis("Horizontal");
-        direction.z = Input.GetAxis("Vertical");
+        direction.x = Input.GetAxisRaw("Horizontal");
+        direction.z = Input.GetAxisRaw("Vertical");
 
-        transform.position += direction;
+        direction.Normalize();
+
+        transform.position += direction * Time.deltaTime * speed;
     }
 }
