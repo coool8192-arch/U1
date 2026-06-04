@@ -8,7 +8,6 @@ public class CreateManager : MonoBehaviour
     [SerializeField] GameObject elemental;
     [SerializeField] List<GameObject> list;
     public float intervalTime = 5.0f;
-    float Timer = 0.0f;
     int count;
 
     void Start()
@@ -29,22 +28,18 @@ public class CreateManager : MonoBehaviour
 
     IEnumerator Coroutine()
     {
-        Debug.Log("Start coroutine");
+        WaitForSeconds wait = new WaitForSeconds(intervalTime);
 
-        yield return new WaitForSeconds(intervalTime);
+        while (count < list.Count)
+        {
+            list[count++].SetActive(true);
 
-        Debug.Log("End coroutine");
+            yield return wait;
+        }
     }
 
     void Update()
     {
-        Timer += Time.deltaTime;
 
-        if (count < list.Count && Timer >= intervalTime)
-        {
-            list[count++].SetActive(true);
-
-            Timer -= intervalTime;
-        }
     }
 }
